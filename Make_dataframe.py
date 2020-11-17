@@ -117,30 +117,80 @@ for item in list(df['Compound']):
 for i in list(holding2.keys()):
     df[i] = holding2[i]
 
-df.to_csv('working_on_it.csv', index=False)
+# df.to_csv('working_on_it.csv', index=False)
+# df = pd.read_csv('working_on_it.csv')
 
 k = list(df).index('E_a')
-coeff1 = [1, 2, 3]
-coeff2 = [1, 2, 3]
-methods = ['+', '-', '*', '/']
+coeff = [1, 2, 3]
+methods = ['+', '-']
 headers = list(df)
 df2 = df.copy()
-# del df
-for c1 in coeff1:
-    for c2 in coeff2:
+del df
+
+for c1 in coeff:
+    for c2 in coeff:
+        for c3 in coeff:
+            for method1 in methods:
+                for method2 in methods:
+
+                    for i in range(14):
+                        counter1 = 1
+                        for j in range(i+1, 14):
+                            if counter1 % 3:
+                                counter2 = 1
+                                for m in range(j+1, 14):
+                                    if counter2 % 3:
+                                        if method1 == '+' and method2 == '+':
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+method2+str(c3)+headers[k+m]] =                c1*df2[headers[k+i]]    + c2*df2[headers[k+j]]    + c3*df2[headers[k+m]]
+                                            df2[str(c1)+headers[k+i]+'^2'+method1+str(c2)+headers[k+j]+method2+str(c3)+headers[k+m]] =           c1*df2[headers[k+i]]**2 + c2*df2[headers[k+j]]    + c3*df2[headers[k+m]]
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]] =           c1*df2[headers[k+i]]    + c2*df2[headers[k+j]]**2 + c3*df2[headers[k+m]]
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+method2+str(c3)+headers[k+m]+'^2'] =           c1*df2[headers[k+i]]    + c2*df2[headers[k+j]]    + c3*df2[headers[k+m]]**2
+                                            # df2[str(c1)+headers[k+i]+'^2'+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]] =      c1*df2[headers[k+i]]**2 + c2*df2[headers[k+j]]**2 + c3*df2[headers[k+m]]
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]+'^2'] =      c1*df2[headers[k+i]]    + c2*df2[headers[k+j]]**2 + c3*df2[headers[k+m]]**2
+                                            # df2[str(c1)+headers[k+i]+'^2'+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]+'^2'] = c1*df2[headers[k+i]]**2 + c2*df2[headers[k+j]]**2 + c3*df2[headers[k+m]]**2
+                                        elif method1 == '+' and method2 == '-':
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+method2+str(c3)+headers[k+m]] =                c1*df2[headers[k+i]]    + c2*df2[headers[k+j]]    - c3*df2[headers[k+m]]
+                                            df2[str(c1)+headers[k+i]+'^2'+method1+str(c2)+headers[k+j]+method2+str(c3)+headers[k+m]] =           c1*df2[headers[k+i]]**2 + c2*df2[headers[k+j]]    - c3*df2[headers[k+m]]
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]] =           c1*df2[headers[k+i]]    + c2*df2[headers[k+j]]**2 - c3*df2[headers[k+m]]
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+method2+str(c3)+headers[k+m]+'^2'] =           c1*df2[headers[k+i]]    + c2*df2[headers[k+j]]    - c3*df2[headers[k+m]]**2
+                                            # df2[str(c1)+headers[k+i]+'^2'+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]] =      c1*df2[headers[k+i]]**2 + c2*df2[headers[k+j]]**2 - c3*df2[headers[k+m]]
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]+'^2'] =      c1*df2[headers[k+i]]    + c2*df2[headers[k+j]]**2 - c3*df2[headers[k+m]]**2
+                                            # df2[str(c1)+headers[k+i]+'^2'+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]+'^2'] = c1*df2[headers[k+i]]**2 + c2*df2[headers[k+j]]**2 - c3*df2[headers[k+m]]**2
+                                        elif method1 == '-' and method2 == '+':
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+method2+str(c3)+headers[k+m]] =                c1*df2[headers[k+i]]    - c2*df2[headers[k+j]]    + c3*df2[headers[k+m]]
+                                            df2[str(c1)+headers[k+i]+'^2'+method1+str(c2)+headers[k+j]+method2+str(c3)+headers[k+m]] =           c1*df2[headers[k+i]]**2 - c2*df2[headers[k+j]]    + c3*df2[headers[k+m]]
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]] =           c1*df2[headers[k+i]]    - c2*df2[headers[k+j]]**2 + c3*df2[headers[k+m]]
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+method2+str(c3)+headers[k+m]+'^2'] =           c1*df2[headers[k+i]]    - c2*df2[headers[k+j]]    + c3*df2[headers[k+m]]**2
+                                            # df2[str(c1)+headers[k+i]+'^2'+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]] =      c1*df2[headers[k+i]]**2 - c2*df2[headers[k+j]]**2 + c3*df2[headers[k+m]]
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]+'^2'] =      c1*df2[headers[k+i]]    - c2*df2[headers[k+j]]**2 + c3*df2[headers[k+m]]**2
+                                            # df2[str(c1)+headers[k+i]+'^2'+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]+'^2'] = c1*df2[headers[k+i]]**2 - c2*df2[headers[k+j]]**2 + c3*df2[headers[k+m]]**2
+                                        elif method1 == '-' and method2 == '-':
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+method2+str(c3)+headers[k+m]] =                c1*df2[headers[k+i]]    - c2*df2[headers[k+j]]    - c3*df2[headers[k+m]]
+                                            df2[str(c1)+headers[k+i]+'^2'+method1+str(c2)+headers[k+j]+method2+str(c3)+headers[k+m]] =           c1*df2[headers[k+i]]**2 - c2*df2[headers[k+j]]    - c3*df2[headers[k+m]]
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]] =           c1*df2[headers[k+i]]    - c2*df2[headers[k+j]]**2 - c3*df2[headers[k+m]]
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+method2+str(c3)+headers[k+m]+'^2'] =           c1*df2[headers[k+i]]    - c2*df2[headers[k+j]]    - c3*df2[headers[k+m]]**2
+                                            # df2[str(c1)+headers[k+i]+'^2'+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]] =      c1*df2[headers[k+i]]**2 - c2*df2[headers[k+j]]**2 - c3*df2[headers[k+m]]
+                                            # df2[str(c1)+headers[k+i]+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]+'^2'] =      c1*df2[headers[k+i]]    - c2*df2[headers[k+j]]**2 - c3*df2[headers[k+m]]**2
+                                            # df2[str(c1)+headers[k+i]+'^2'+method1+str(c2)+headers[k+j]+'^2'+method2+str(c3)+headers[k+m]+'^2'] = c1*df2[headers[k+i]]**2 - c2*df2[headers[k+j]]**2 - c3*df2[headers[k+m]]**2
+                                    counter2 += 1
+                            counter1 += 1
+
+
+for c1 in coeff:
+    for c2 in coeff:
         for method in methods:
             for i in range(14):
                 counter = 1
                 for j in range(i+1, 14):
                     if counter % 3:
                         if method == '+':
-                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]] = c1*df[headers[k+i]] + c2*df[headers[k+j]]
+                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]] = c1*df2[headers[k+i]] + c2*df2[headers[k+j]]
                         elif method == '-':
-                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]] = c1*df[headers[k+i]] - c2*df[headers[k+j]]
+                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]] = c1*df2[headers[k+i]] - c2*df2[headers[k+j]]
                         elif method == '*':
-                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]] = c1*df[headers[k+i]] * c2*df[headers[k+j]]
+                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]] = c1*df2[headers[k+i]] * c2*df2[headers[k+j]]
                         elif method == '/':
-                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]] = c1*df[headers[k+i]] / c2*df[headers[k+j]]
+                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]] = c1*df2[headers[k+i]] / c2*df2[headers[k+j]]
                     counter += 1
 
             for i in range(14):
@@ -148,13 +198,13 @@ for c1 in coeff1:
                 for j in range(i+1, 14):
                     if counter % 3:
                         if method == '+':
-                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]] = c1*df[headers[k+i]]**2 + c2*df[headers[k+j]]
+                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]] = c1*df2[headers[k+i]]**2 + c2*df2[headers[k+j]]
                         elif method == '-':
-                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]] = c1*df[headers[k+i]]**2 - c2*df[headers[k+j]]
+                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]] = c1*df2[headers[k+i]]**2 - c2*df2[headers[k+j]]
                         elif method == '*':
-                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]] = c1*df[headers[k+i]]**2 * c2*df[headers[k+j]]
+                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]] = c1*df2[headers[k+i]]**2 * c2*df2[headers[k+j]]
                         elif method == '/':
-                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]] = c1*df[headers[k+i]]**2 / c2*df[headers[k+j]]
+                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]] = c1*df2[headers[k+i]]**2 / c2*df2[headers[k+j]]
                     counter += 1
 
             for i in range(14):
@@ -162,13 +212,13 @@ for c1 in coeff1:
                 for j in range(i+1, 14):
                     if counter % 3:
                         if method == '+':
-                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]+'^2'] = c1*df[headers[k+i]] + c2*df[headers[k+j]]**2
+                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]+'^2'] = c1*df2[headers[k+i]] + c2*df2[headers[k+j]]**2
                         elif method == '-':
-                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]+'^2'] = c1*df[headers[k+i]] - c2*df[headers[k+j]]**2
+                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]+'^2'] = c1*df2[headers[k+i]] - c2*df2[headers[k+j]]**2
                         elif method == '*':
-                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]+'^2'] = c1*df[headers[k+i]] * c2*df[headers[k+j]]**2
+                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]+'^2'] = c1*df2[headers[k+i]] * c2*df2[headers[k+j]]**2
                         elif method == '/':
-                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]+'^2'] = c1*df[headers[k+i]] / c2*df[headers[k+j]]**2
+                            df2[str(c1)+headers[k+i]+method+str(c2)+headers[k+j]+'^2'] = c1*df2[headers[k+i]] / c2*df2[headers[k+j]]**2
                     counter += 1
 
             for i in range(14):
@@ -176,13 +226,13 @@ for c1 in coeff1:
                 for j in range(i+1, 14, 3):
                     if counter % 3:
                         if method == '+':
-                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]+'^2'] = c1*df[headers[k+i]]**2 + c2*df[headers[k+j]]**2
+                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]+'^2'] = c1*df2[headers[k+i]]**2 + c2*df2[headers[k+j]]**2
                         elif method == '-':
-                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]+'^2'] = c1*df[headers[k+i]]**2 - c2*df[headers[k+j]]**2
+                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]+'^2'] = c1*df2[headers[k+i]]**2 - c2*df2[headers[k+j]]**2
                         elif method == '*':
-                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]+'^2'] = c1*df[headers[k+i]]**2 * c2*df[headers[k+j]]**2
+                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]+'^2'] = c1*df2[headers[k+i]]**2 * c2*df2[headers[k+j]]**2
                         elif method == '/':
-                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]+'^2'] = c1*df[headers[k+i]]**2 / c2*df[headers[k+j]]**2
+                            df2[str(c1)+headers[k+i]+'^2'+method+str(c2)+headers[k+j]+'^2'] = c1*df2[headers[k+i]]**2 / c2*df2[headers[k+j]]**2
                     counter += 1
 
 
@@ -202,12 +252,12 @@ df2.to_csv('almost_there.csv', index=False)
 
 headers = list(df2)
 nump = df2.to_numpy().transpose().copy()
-len(headers)
+
 
 corr_matrix = pd.DataFrame(data=np.corrcoef(nump), columns=headers)
 upper = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(np.bool))
 to_drop = [column for column in upper.columns if any(upper[column] > 0.95)]
-8052 - len(to_drop)
+
 df2.drop(to_drop, axis=1, inplace=True)
 
 
@@ -216,31 +266,32 @@ p = heads.index('BG')
 new_dataset = df2[[heads[1:p]+heads[p+1:]+[heads[p]]][0]].copy()
 new_dataset.to_csv('Prior_Classify.csv', index=False)
 
+# new_dataset = pd.read_csv('Prior_Classify.csv')
+
 ################################################################################
 # Perform Variance work
 ################################################################################
 
-# heads = list(new_dataset)
-# hist = np.array(new_dataset.var()) / np.array(new_dataset.mean())
-# indices = np.array([int(i) for i in range(len(hist)) if hist[i] >= -1 and hist[i] <= 1])
-# heads2 = []
-# for i in indices:
-#     heads2.append(heads[i])
-#
-# if 'BG' not in heads2:
-#     heads2.append('BG')
-#
-#
-# new_dataset = new_dataset[heads2].copy()
-# new_dataset.to_csv('Prior_Classify4.csv', index=False)
-#
-#
-# import matplotlib.pyplot as plt
-# plot = True
-# if plot:
-#     plt.figure(figsize=(12,8))
-#     plt.hist(hist, bins=5000)
-#     plt.xlim(-50, 50)
+heads = list(new_dataset)
+hist = np.array(new_dataset.var()) / np.array(new_dataset.mean())
+heads2 = np.array([heads[int(i)] for i in range(len(hist)) if hist[i] <= -0.25 or hist[i] >= 0.25])
+
+len(heads2)
+if 'BG' not in heads2:
+    heads2.append('BG')
+
+new_dataset2 = new_dataset[heads2].copy()
+new_dataset2.to_csv('Prior_Classify.csv', index=False)
+
+no_0_BG = new_dataset2[new_dataset2['BG'] != 0]
+no_0_BG.to_csv('no_zero_BG.csv', index=False)
+
+import matplotlib.pyplot as plt
+plot = True
+if plot:
+    plt.figure(figsize=(12,8))
+    plt.hist(hist, bins=1000)
+    plt.xlim(-50, 50)
 
 ################################################################################
 # Make Classification Dataset
