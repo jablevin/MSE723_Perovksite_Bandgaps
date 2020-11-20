@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.feature_selection import SelectKBest, mutual_info_regression, RFE, f_regression
+from sklearn.feature_selection import SelectKBest, f_classif, mutual_info_classif, RFE
 from sklearn.metrics import r2_score, accuracy_score
 from sklearn.pipeline import Pipeline
 import os
@@ -17,30 +17,30 @@ class Classifier(object):
         self.feature_names=list(self.x.columns)
         self.x_train, self.x_test, self.y_train, self.y_test = train_test_split(self.x, y, test_size=.15, random_state=0)
 
-        self.acc = {'f_regression':[], 'mutual':[], 'rfe':[]}
+        self.acc = {'f_classif':[], 'mutual':[], 'rfe':[]}
         for n in n_range:
             np.random.seed(seed)
             #########################################################################
-            # Train and test on GradientBoostingClassifier with f_regression
+            # Train and test on GradientBoostingClassifier with f_classif
             #########################################################################
 
             if ftest:
-                Ftest = SelectKBest(score_func=f_regression, k=n)
+                Ftest = SelectKBest(score_func=f_classif, k=n)
                 boost_clf = Pipeline((("Feature_select", Ftest),
-                                    ("Regression", GradientBoostingClassifier(loss=loss_, n_estimators=estimators))))
+                                    ("Classify", GradientBoostingClassifier(loss=loss_, n_estimators=estimators))))
 
                 self.y_pred_f = boost_clf.fit(self.x_train, self.y_train).predict(self.x_test)
-                self.acc['f_regression'].append(accuracy_score(self.y_test, self.y_pred_f))
+                self.acc['f_classif'].append(accuracy_score(self.y_test, self.y_pred_f))
                 mask_Ftest  = Ftest.get_support()
 
             #########################################################################
-            # Train and test on GradientBoostingClassifier with mutual info regression
+            # Train and test on GradientBoostingClassifier with mutual_info_classif
             #########################################################################
 
             if mutual:
-                mutual = SelectKBest(score_func=mutual_info_regression, k=n)
+                mutual = SelectKBest(score_func=mutual_info_classif, k=n)
                 boost_m_clf = Pipeline((("Feature_select", mutual),
-                                    ("Regression", GradientBoostingClassifier(loss=loss_, n_estimators=estimators))))
+                                    ("Classify", GradientBoostingClassifier(loss=loss_, n_estimators=estimators))))
 
                 self.y_pred_m = boost_m_clf.fit(self.x_train, self.y_train).predict(self.x_test)
                 self.acc['mutual'].append(accuracy_score(self.y_test, self.y_pred_m))
